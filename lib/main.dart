@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/bloc/notes_bloc/notes_bloc.dart';
-import 'package:notes_app/bloc/notes_bloc/notes_event.dart';
-import 'package:notes_app/screen/home/home_screen.dart';
 import 'package:notes_app/utils/route_name.dart';
 
 import 'data/local/local_database.dart';
@@ -11,7 +9,8 @@ void main() {
 
   runApp(
       MultiBlocProvider(providers: [
-          BlocProvider(create: (_)=> NotesBloc()),
+          BlocProvider(create: (_)=> NotesBloc(),
+          ),
   ], child: const MyApp()),
   );
 }

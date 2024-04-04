@@ -120,18 +120,16 @@ class HomeScreen extends StatelessWidget {
 
             return
               state.allNotes.isEmpty? Center(
-                child: Center(
-                  child: Container(
-                    height: 200,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: const DecorationImage(
-                        image: AssetImage("[removal.ai]_c2baa865-2dd2-46fd-9ecc-09b35e9ad37a-photo_2024-04-04_15-30-46.png"),
-                      ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: const DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage("[removal.ai]_c2baa865-2dd2-46fd-9ecc-09b35e9ad37a-photo_2024-04-04_15-30-46.png"),
                     ),
                   ),
-                ) ):
+                ),
+              ):
               ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
               itemCount: state.allNotes.length,
@@ -160,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) {
                           return AlertDialog(
                             content: Text("Are you sure"),
-                            title: Text("Do you want delete all"),
+                            title: Text("Do you want to delete"),
                             actions: [
                               TextButton(
                                   onPressed: () {
@@ -171,7 +169,12 @@ class HomeScreen extends StatelessWidget {
                                   onPressed: () {
                                     context.read<NotesBloc>().add(
                                         DeleteNotesEvent(
-                                            state.allNotes[index].id!));
+                                            state.allNotes[index].id!,
+                                        ),
+                                    );
+                                    context.read<NotesBloc>().add(
+                                      GetNotesEvent(),
+                                    );
                                     Navigator.pop(context);
                                   },
                                   child: Text("Ok"))
@@ -192,7 +195,7 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    key: Key(state.allNotes[index].id.toString()),
+                    key: Key(state.allNotes[index].id.toString(),),
                     onDismissed: (direction) {},
                     child: Container(
                       margin: EdgeInsets.only(bottom: 15),
@@ -229,11 +232,10 @@ class HomeScreen extends StatelessWidget {
           } else if (state is NotesDeleteAllState) {
             return Center(
               child: Container(
-                height: 200,
-                width: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: const DecorationImage(
+                    fit: BoxFit.fill,
                     image: AssetImage("[removal.ai]_c2baa865-2dd2-46fd-9ecc-09b35e9ad37a-photo_2024-04-04_15-30-46.png"),
                   ),
                 ),
@@ -256,11 +258,10 @@ class HomeScreen extends StatelessWidget {
           }
           return Center(
             child: Container(
-              height: 200,
-              width: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 image: const DecorationImage(
+                  fit: BoxFit.fill,
                   image: AssetImage("[removal.ai]_c2baa865-2dd2-46fd-9ecc-09b35e9ad37a-photo_2024-04-04_15-30-46.png"),
                 ),
               ),
